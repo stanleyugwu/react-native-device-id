@@ -1,6 +1,7 @@
 # React Native Device ID
 
 Fetches the device ID for both Android and iOS.
+
 On __Android__ this will be `Secure.ANDROID_ID`, on __iOS__ this will be the device vendor's `UUID`
 
 ## Installation
@@ -11,12 +12,12 @@ npm install @devvie/rn-device-id
 
 ## Usage
 
-```js
+```tsx
 import { getDeviceId } from '@devvie/rn-device-id';
 
 // ...
 
-const deviceId = await getDeviceId(3, 7);
+const deviceId = await getDeviceId();
 ```
 
 ## Contributing
