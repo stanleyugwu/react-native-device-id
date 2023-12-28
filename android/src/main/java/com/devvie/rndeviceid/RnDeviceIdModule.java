@@ -6,6 +6,11 @@ import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactMethod;
 
+import android.provider.Settings;
+import java.util.HashMap;
+import java.util.Map;
+import static android.provider.Settings.Secure.getString;
+
 public class RnDeviceIdModule extends RnDeviceIdSpec {
   public static final String NAME = "RnDeviceId";
 
@@ -19,11 +24,19 @@ public class RnDeviceIdModule extends RnDeviceIdSpec {
     return NAME;
   }
 
+  // overrides getConstants method of the bridge to create a constant 
+  // object with property deviceId which holds the return value of getDeviceId method.
+  // this constant object can be accessed from JS side by calling getConstants() on this
+  // class. I.e DeviceId.getConstants().deviceId
+  @Override
+    public Map<String, Object> getConstants(){
+        final Map<String, Object> constants = new HashMap<>();
+        constants.put("deviceId", getDeviceId());
+        return constants;
+    }
 
-  // Example method
-  // See https://reactnative.dev/docs/native-modules-android
-  @ReactMethod
-  public void multiply(double a, double b, Promise promise) {
-    promise.resolve(a * b);
-  }
+  // main method to get device ID
+  @ReactMethod(isBlockingSynchronousMethod = false)
+    public String getDeviceId() { return getString(getReactApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID); }
+
 }
