@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 import static android.provider.Settings.Secure.getString;
 
+@ReactModule(name = RnDeviceIdModule.NAME)
 public class RnDeviceIdModule extends RnDeviceIdSpec {
   public static final String NAME = "RnDeviceId";
 
