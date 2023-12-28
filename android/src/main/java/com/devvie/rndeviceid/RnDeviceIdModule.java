@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.Map;
 import static android.provider.Settings.Secure.getString;
 
-@ReactModule(name = RnDeviceIdModule.NAME)
 public class RnDeviceIdModule extends RnDeviceIdSpec {
   public static final String NAME = "RnDeviceId";
 
@@ -38,6 +37,6 @@ public class RnDeviceIdModule extends RnDeviceIdSpec {
 
   // main method to get device ID
   @ReactMethod(isBlockingSynchronousMethod = false)
-    public String getDeviceId() { return getString(getReactApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID); }
+    public void getDeviceId(Promise promise) { promise.resolve(getString(getReactApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID)); }
 
 }
